@@ -48,7 +48,7 @@ import { CloudflareCaptchaModule } from 'nestjs-cloudflare-captcha'
 			useFactory: async (configService: ConfigService) => ({
 				secretKey: configService.get('CAPTCHA_SECRET_KEY'),
 				token: req => req.body.captchaToken,
-				skipIf: process.env.NODE_ENV === 'development',
+				skipIf: configService.get('NODE_ENV') === 'development',
 			}),
 		}),
 	],
