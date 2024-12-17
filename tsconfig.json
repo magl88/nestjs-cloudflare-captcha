@@ -11,12 +11,7 @@
 		"sourceMap": false,
 		"rootDir": "./lib",
 		"outDir": "./dist",
-		"skipLibCheck": true,
-		"baseUrl": ".",
-		"paths": {
-			"nestjs-cloudflare-captcha": ["lib/index.ts"],
-			"nestjs-cloudflare-captcha/*": ["lib/*"]
-		}
+		"skipLibCheck": true
 	},
 	"include": ["lib/**/*"],
 	"exclude": ["node_modules", "**/*.spec.ts"]
