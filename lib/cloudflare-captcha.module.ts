@@ -29,7 +29,7 @@ export class CloudflareCaptchaModule {
 		options: CloudflareCaptchaAsyncOptions
 	): DynamicModule {
 		return {
-			module: CloudflareCaptchaService,
+			module: CloudflareCaptchaModule,
 			imports: [HttpModule, ...(options.imports || [])],
 			providers: [
 				{

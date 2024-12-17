@@ -1,8 +1,6 @@
 import type { FactoryProvider, ModuleMetadata } from '@nestjs/common'
 
-export const CloudflareCaptchaOptionsSymbol = Symbol(
-	'CloudflareCaptchaOptionsSymbol'
-)
+export const CloudflareCaptchaOptionsSymbol = Symbol()
 
 export type CloudflareCaptchaOptions = {
 	secretKey: string
