@@ -1,6 +1,6 @@
 {
 	"name": "nestjs-cloudflare-captcha",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "A library for integrating and working with Cloudflare CAPTCHA in NestJS applications.",
 	"keywords": [
 		"nest",
