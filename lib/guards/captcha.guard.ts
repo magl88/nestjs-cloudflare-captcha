@@ -7,17 +7,17 @@ import {
 } from '@nestjs/common'
 import type { Request } from 'express'
 import {
-	type CloudflareCaptchaOptions,
-	CloudflareCaptchaOptionsSymbol,
-} from '../interfaces/cloudflare-options.interface'
-import { CloudflareCaptchaService } from '../services/cloudflare-captcha.service'
+	type CaptchaOptions,
+	CaptchaOptionsSymbol,
+} from '../interfaces/options.interface'
+import { CaptchaService } from '../services/captcha.service'
 
 @Injectable()
-export class CloudflareCaptchaGuard implements CanActivate {
+export class CaptchaGuard implements CanActivate {
 	public constructor(
-		@Inject(CloudflareCaptchaOptionsSymbol)
-		private readonly options: CloudflareCaptchaOptions,
-		private readonly cloudflareCaptchaService: CloudflareCaptchaService
+		@Inject(CaptchaOptionsSymbol)
+		private readonly options: CaptchaOptions,
+		private readonly CaptchaService: CaptchaService
 	) {}
 
 	public async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -41,7 +41,7 @@ export class CloudflareCaptchaGuard implements CanActivate {
 		}
 
 		const { success } =
-			await this.cloudflareCaptchaService.validateToken(responseToken)
+			await this.CaptchaService.validateToken(responseToken)
 
 		if (!success) {
 			throw new BadRequestException('Invalid CAPTCHA token')

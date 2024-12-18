@@ -1,1 +1,1 @@
-export * from './cloudflare-captcha.guard'
+export * from './captcha.guard'

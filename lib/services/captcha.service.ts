@@ -5,24 +5,24 @@ import {
 	InternalServerErrorException,
 } from '@nestjs/common'
 import { catchError, firstValueFrom } from 'rxjs'
-import { DEFAULT_URL } from '../cloudflare-captcha.constants'
+import { API_URL } from '../captcha.constants'
 import {
-	type CloudflareCaptchaOptions,
-	CloudflareCaptchaOptionsSymbol,
-} from '../interfaces/cloudflare-options.interface'
+	CaptchaOptions,
+	CaptchaOptionsSymbol,
+} from '../interfaces/options.interface'
 
 @Injectable()
-export class CloudflareCaptchaService {
+export class CaptchaService {
 	private readonly secretKey: string
 	private readonly apiUrl: string
 
 	public constructor(
-		@Inject(CloudflareCaptchaOptionsSymbol)
-		private readonly options: CloudflareCaptchaOptions,
+		@Inject(CaptchaOptionsSymbol)
+		private readonly options: CaptchaOptions,
 		private readonly httpService: HttpService
 	) {
 		this.secretKey = this.options.secretKey
-		this.apiUrl = DEFAULT_URL
+		this.apiUrl = API_URL
 	}
 
 	public async validateToken(token: string) {

@@ -1,1 +1,1 @@
-export * from './check-captcha.decorator'
+export * from './captcha.decorator'

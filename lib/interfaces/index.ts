@@ -1,1 +1,1 @@
-export * from './cloudflare-options.interface'
+export * from './options.interface'
