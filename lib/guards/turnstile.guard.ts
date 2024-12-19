@@ -7,17 +7,17 @@ import {
 } from '@nestjs/common'
 import type { Request } from 'express'
 import {
-	type CaptchaOptions,
-	CaptchaOptionsSymbol,
+	type TurnstileOptions,
+	TurnstileOptionsSymbol,
 } from '../interfaces/options.interface'
-import { CaptchaService } from '../services/captcha.service'
+import { TurnstileService } from '../services'
 
 @Injectable()
-export class CaptchaGuard implements CanActivate {
+export class TurnstileGuard implements CanActivate {
 	public constructor(
-		@Inject(CaptchaOptionsSymbol)
-		private readonly options: CaptchaOptions,
-		private readonly CaptchaService: CaptchaService
+		@Inject(TurnstileOptionsSymbol)
+		private readonly options: TurnstileOptions,
+		private readonly TurnstileService: TurnstileService
 	) {}
 
 	public async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -37,14 +37,14 @@ export class CaptchaGuard implements CanActivate {
 		const responseToken = this.options.token(request)
 
 		if (!responseToken) {
-			throw new BadRequestException('CAPTCHA token is missing')
+			throw new BadRequestException('TURNSTILE token is missing')
 		}
 
 		const { success } =
-			await this.CaptchaService.validateToken(responseToken)
+			await this.TurnstileService.validateToken(responseToken)
 
 		if (!success) {
-			throw new BadRequestException('Invalid CAPTCHA token')
+			throw new BadRequestException('Invalid TURNSTILE token')
 		}
 
 		return success

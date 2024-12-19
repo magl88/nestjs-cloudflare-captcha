@@ -16,17 +16,17 @@ yarn add nestjs-cloudflare-captcha
 
 ### 1. Module Configuration
 
-To use CloudflareCaptchaModule, you need to import it into your main module and pass the configuration.
+To use TurnstileModule, you need to import it into your main module and pass the configuration.
 
 **Example using synchronous configuration:**
 
 ```typescript
 import { Module } from '@nestjs/common'
-import { CloudflareCaptchaModule } from 'nestjs-cloudflare-captcha'
+import { TurnstileModule } from 'nestjs-cloudflare-captcha'
 
 @Module({
 	imports: [
-		CloudflareCaptchaModule.forRoot({
+		TurnstileModule.forRoot({
 			secretKey: process.env.CAPTCHA_SECRET_KEY,
 			token: req => req.body.captchaToken,
 			skipIf: process.env.NODE_ENV === 'development',
@@ -40,14 +40,14 @@ export class AppModule {}
 
 ```typescript
 import { Module } from '@nestjs/common'
-import { CloudflareCaptchaModule } from 'nestjs-cloudflare-captcha'
+import { TurnstileModule } from 'nestjs-cloudflare-captcha'
 
 @Module({
 	imports: [
-		CloudflareCaptchaModule.forRootAsync({
+		TurnstileModule.forRootAsync({
 			useFactory: async (configService: ConfigService) => ({
 				secretKey: configService.get('CAPTCHA_SECRET_KEY'),
-				token: req => req.body.captchaToken,
+				token: req => req.headers['captcha-token'],
 				skipIf: configService.get('NODE_ENV') === 'development',
 			}),
 		}),
@@ -67,10 +67,10 @@ import { Controller, Post } from '@nestjs/common'
 import { Turnstile } from 'nestjs-cloudflare-captcha'
 
 @Controller('auth')
-export class SomeController {
+export class AuthController {
 	@Post('login')
 	@Turnstile()
-	login() {
+	async login() {
 		return 'This method is protected from bots with CAPTCHA'
 	}
 }

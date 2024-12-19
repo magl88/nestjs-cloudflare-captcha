@@ -1,1 +1,1 @@
-export * from './captcha.service'
+export * from './turnstile.service'

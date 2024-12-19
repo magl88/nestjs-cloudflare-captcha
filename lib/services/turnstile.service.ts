@@ -5,20 +5,17 @@ import {
 	InternalServerErrorException,
 } from '@nestjs/common'
 import { catchError, firstValueFrom } from 'rxjs'
-import { API_URL } from '../captcha.constants'
-import {
-	CaptchaOptions,
-	CaptchaOptionsSymbol,
-} from '../interfaces/options.interface'
+import { type TurnstileOptions, TurnstileOptionsSymbol } from '../interfaces'
+import { API_URL } from '../turnstile.constants'
 
 @Injectable()
-export class CaptchaService {
+export class TurnstileService {
 	private readonly secretKey: string
 	private readonly apiUrl: string
 
 	public constructor(
-		@Inject(CaptchaOptionsSymbol)
-		private readonly options: CaptchaOptions,
+		@Inject(TurnstileOptionsSymbol)
+		private readonly options: TurnstileOptions,
 		private readonly httpService: HttpService
 	) {
 		this.secretKey = this.options.secretKey

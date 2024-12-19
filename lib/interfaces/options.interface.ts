@@ -1,14 +1,15 @@
 import type { FactoryProvider, ModuleMetadata } from '@nestjs/common'
+import type { Request } from 'express'
 
-export const CaptchaOptionsSymbol = Symbol('CaptchaOptionsSymbol')
+export const TurnstileOptionsSymbol = Symbol('TurnstileOptionsSymbol')
 
-export type CaptchaOptions = {
+export type TurnstileOptions = {
 	secretKey: string
-	token: (req) => string
+	token: (req: Request | any) => string
 	skipIf?:
 		| boolean
 		| (<Req = unknown>(request: Req) => boolean | Promise<boolean>)
 }
 
-export type CaptchaAsyncOptions = Pick<ModuleMetadata, 'imports'> &
-	Pick<FactoryProvider<CaptchaOptions>, 'useFactory' | 'inject'>
+export type TurnstileAsyncOptions = Pick<ModuleMetadata, 'imports'> &
+	Pick<FactoryProvider<TurnstileOptions>, 'useFactory' | 'inject'>

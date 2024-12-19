@@ -1,1 +1,1 @@
-export * from './captcha.decorator'
+export * from './turnstile.decorator'

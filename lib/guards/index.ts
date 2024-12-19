@@ -1,1 +1,1 @@
-export * from './captcha.guard'
+export * from './turnstile.guard'
