@@ -21,7 +21,7 @@ export class TurnstileModule {
 				},
 				TurnstileService,
 			],
-			exports: [TurnstileService],
+			exports: [TurnstileService, TurnstileOptionsSymbol],
 			global: true,
 		}
 	}
@@ -38,7 +38,7 @@ export class TurnstileModule {
 				},
 				TurnstileService,
 			],
-			exports: [TurnstileService],
+			exports: [TurnstileService, TurnstileOptionsSymbol],
 			global: true,
 		}
 	}
